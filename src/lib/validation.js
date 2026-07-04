@@ -10,7 +10,8 @@ export function isValidName(name) {
 }
 
 export function isValidPassword(password) {
-  return (password || '').length >= 6;
+  const p = password || '';
+  return p.length >= 8 && /[a-z]/.test(p) && /[A-Z]/.test(p);
 }
 
 export function isValidPostContent(content) {

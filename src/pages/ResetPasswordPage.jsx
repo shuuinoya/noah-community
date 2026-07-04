@@ -4,7 +4,7 @@ import { useLang } from '../i18n';
 import { useAuth } from '../context/AuthContext';
 import { AuthLayout } from '../components/AuthLayout';
 import { Button } from '../components/ui/Button';
-import { Input, Label, ErrorText } from '../components/ui/Field';
+import { Input, PasswordInput, Label, ErrorText } from '../components/ui/Field';
 import { isValidPassword } from '../lib/validation';
 
 export function ResetPasswordPage() {
@@ -37,11 +37,11 @@ export function ResetPasswordPage() {
         <form onSubmit={handleSubmit}>
           <div style={{ marginBottom: 14 }}>
             <Label>{t('auth.password')}</Label>
-            <Input type="password" value={password} onChange={(e) => setPassword(e.target.value)} autoComplete="new-password" required />
+            <PasswordInput value={password} onChange={(e) => setPassword(e.target.value)} autoComplete="new-password" required />
           </div>
           <div style={{ marginBottom: 14 }}>
             <Label>{t('auth.confirmPassword')}</Label>
-            <Input type="password" value={confirmPassword} onChange={(e) => setConfirmPassword(e.target.value)} autoComplete="new-password" required />
+            <PasswordInput value={confirmPassword} onChange={(e) => setConfirmPassword(e.target.value)} autoComplete="new-password" required />
           </div>
           <ErrorText>{error}</ErrorText>
           <Button type="submit" disabled={busy}>{t('auth.save')}</Button>

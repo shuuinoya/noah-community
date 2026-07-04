@@ -1,4 +1,6 @@
+import { useState } from 'react';
 import { T } from '../../theme';
+import { Icon } from '../Icon';
 
 const baseStyle = {
   width: '100%', boxSizing: 'border-box', minHeight: 44,
@@ -9,6 +11,31 @@ const baseStyle = {
 
 export function Input({ style, ...props }) {
   return <input style={{ ...baseStyle, ...style }} {...props} />;
+}
+
+export function PasswordInput({ style, ...props }) {
+  const [visible, setVisible] = useState(false);
+  return (
+    <div style={{ position: 'relative' }}>
+      <input
+        type={visible ? 'text' : 'password'}
+        style={{ ...baseStyle, paddingRight: 44, ...style }}
+        {...props}
+      />
+      <button
+        type="button"
+        onClick={() => setVisible((v) => !v)}
+        aria-label={visible ? 'Hide password' : 'Show password'}
+        style={{
+          position: 'absolute', right: 4, top: 0, bottom: 0, width: 40,
+          display: 'flex', alignItems: 'center', justifyContent: 'center',
+          background: 'none', border: 'none', cursor: 'pointer', color: T.muted,
+        }}
+      >
+        <Icon name={visible ? 'eyeOff' : 'eye'} size={18} />
+      </button>
+    </div>
+  );
 }
 
 export function Select({ style, children, ...props }) {

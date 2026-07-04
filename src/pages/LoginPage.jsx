@@ -4,7 +4,7 @@ import { useLang } from '../i18n';
 import { useAuth } from '../context/AuthContext';
 import { AuthLayout } from '../components/AuthLayout';
 import { Button } from '../components/ui/Button';
-import { Input, Label, ErrorText } from '../components/ui/Field';
+import { Input, PasswordInput, Label, ErrorText } from '../components/ui/Field';
 import { GoogleIcon } from '../components/Icon';
 import { isValidEmail } from '../lib/validation';
 import { GOOGLE_LOGIN_ENABLED } from '../lib/features';
@@ -59,7 +59,7 @@ export function LoginPage({ onNavigate }) {
         </div>
         <div style={{ marginBottom: 8 }}>
           <Label>{t('auth.password')}</Label>
-          <Input type="password" value={password} onChange={(e) => setPassword(e.target.value)} autoComplete="current-password" required />
+          <PasswordInput value={password} onChange={(e) => setPassword(e.target.value)} autoComplete="current-password" required />
         </div>
         <div style={{ textAlign: 'right', marginBottom: 14 }}>
           <button type="button" onClick={() => onNavigate('forgotPassword')} style={{

@@ -4,7 +4,7 @@ import { useLang } from '../i18n';
 import { useAuth } from '../context/AuthContext';
 import { AuthLayout } from '../components/AuthLayout';
 import { Button } from '../components/ui/Button';
-import { Input, Select, Label, ErrorText } from '../components/ui/Field';
+import { Input, PasswordInput, Select, Label, ErrorText } from '../components/ui/Field';
 import { GoogleIcon } from '../components/Icon';
 import { COUNTRIES } from '../lib/countries';
 import { isValidEmail, isValidName, isValidPassword } from '../lib/validation';
@@ -84,11 +84,11 @@ export function SignupPage({ onNavigate }) {
         </div>
         <div style={{ marginBottom: 14 }}>
           <Label>{t('auth.password')}</Label>
-          <Input type="password" value={password} onChange={(e) => setPassword(e.target.value)} autoComplete="new-password" required />
+          <PasswordInput value={password} onChange={(e) => setPassword(e.target.value)} autoComplete="new-password" required />
         </div>
         <div style={{ marginBottom: 14 }}>
           <Label>{t('auth.confirmPassword')}</Label>
-          <Input type="password" value={confirmPassword} onChange={(e) => setConfirmPassword(e.target.value)} autoComplete="new-password" required />
+          <PasswordInput value={confirmPassword} onChange={(e) => setConfirmPassword(e.target.value)} autoComplete="new-password" required />
         </div>
         <div style={{ marginBottom: 14 }}>
           <Label>{t('auth.country')}</Label>
