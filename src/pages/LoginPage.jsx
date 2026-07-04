@@ -7,6 +7,7 @@ import { Button } from '../components/ui/Button';
 import { Input, Label, ErrorText } from '../components/ui/Field';
 import { GoogleIcon } from '../components/Icon';
 import { isValidEmail } from '../lib/validation';
+import { GOOGLE_LOGIN_ENABLED } from '../lib/features';
 
 export function LoginPage({ onNavigate }) {
   const { t } = useLang();
@@ -37,15 +38,19 @@ export function LoginPage({ onNavigate }) {
       <h1 style={{ fontFamily: T.serif, fontSize: 22, color: T.ink, margin: '0 0 4px' }}>{t('auth.welcome')}</h1>
       <p style={{ fontFamily: T.sans, fontSize: 13, color: T.inkSoft, margin: '0 0 20px' }}>{t('auth.welcomeSubtitle')}</p>
 
-      <Button type="button" variant="outline" onClick={handleGoogle} style={{ marginBottom: 16 }}>
-        <GoogleIcon /> {t('auth.continueWithGoogle')}
-      </Button>
+      {GOOGLE_LOGIN_ENABLED && (
+        <>
+          <Button type="button" variant="outline" onClick={handleGoogle} style={{ marginBottom: 16 }}>
+            <GoogleIcon /> {t('auth.continueWithGoogle')}
+          </Button>
 
-      <div style={{ display: 'flex', alignItems: 'center', gap: 10, margin: '4px 0 16px' }}>
-        <div style={{ flex: 1, height: 1, background: T.hair }} />
-        <span style={{ fontFamily: T.sans, fontSize: 12, color: T.muted }}>{t('auth.orLoginWithEmail')}</span>
-        <div style={{ flex: 1, height: 1, background: T.hair }} />
-      </div>
+          <div style={{ display: 'flex', alignItems: 'center', gap: 10, margin: '4px 0 16px' }}>
+            <div style={{ flex: 1, height: 1, background: T.hair }} />
+            <span style={{ fontFamily: T.sans, fontSize: 12, color: T.muted }}>{t('auth.orLoginWithEmail')}</span>
+            <div style={{ flex: 1, height: 1, background: T.hair }} />
+          </div>
+        </>
+      )}
 
       <form onSubmit={handleSubmit}>
         <div style={{ marginBottom: 14 }}>

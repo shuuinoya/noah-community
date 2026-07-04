@@ -24,3 +24,4 @@ npm-debug.log*
 
 # Supabase CLI local state
 supabase/.temp
+.env*
