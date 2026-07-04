@@ -198,3 +198,10 @@ create policy "users can insert their own likes"
 create policy "users can delete their own likes"
   on public.post_likes for delete
   using (auth.uid() = user_id);
+
+-- ============================================================================
+-- Realtime — enable INSERT broadcasts for the timeline/thread feed
+-- (equivalent to toggling posts/replies on in Database → Replication)
+-- ============================================================================
+alter publication supabase_realtime add table public.posts;
+alter publication supabase_realtime add table public.replies;
