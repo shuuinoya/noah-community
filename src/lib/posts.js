@@ -32,6 +32,11 @@ export async function deletePost(postId) {
 
 const REPLY_SELECT = '*, profiles:user_id (display_name, avatar_url)';
 
+export async function fetchReply(replyId) {
+  const { data, error } = await supabase.from('replies').select(REPLY_SELECT).eq('id', replyId).maybeSingle();
+  return { data, error };
+}
+
 export async function fetchReplies(postId) {
   const { data, error } = await supabase
     .from('replies')

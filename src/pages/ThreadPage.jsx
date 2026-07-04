@@ -2,7 +2,7 @@ import { useEffect, useRef, useState } from 'react';
 import { T } from '../theme';
 import { useLang } from '../i18n';
 import { supabase } from '../lib/supabase';
-import { fetchPost, fetchReplies, createReply, fetchMyLikedPostIds } from '../lib/posts';
+import { fetchPost, fetchReplies, fetchReply, createReply, fetchMyLikedPostIds } from '../lib/posts';
 import { Header } from '../components/Header';
 import { Composer } from '../components/Composer';
 import { PostCard } from '../components/PostCard';
@@ -40,8 +40,10 @@ export function ThreadPage({ postId, onBack }) {
   useEffect(() => {
     const channel = supabase
       .channel(`thread-${postId}`)
-      .on('postgres_changes', { event: 'INSERT', schema: 'public', table: 'replies', filter: `post_id=eq.${postId}` }, (payload) => {
-        setReplies((prev) => (prev.some((r) => r.id === payload.new.id) ? prev : [...prev, payload.new]));
+      .on('postgres_changes', { event: 'INSERT', schema: 'public', table: 'replies', filter: `post_id=eq.${postId}` }, async (payload) => {
+        const { data } = await fetchReply(payload.new.id);
+        if (!data) return;
+        setReplies((prev) => (prev.some((r) => r.id === data.id) ? prev : [...prev, data]));
         setPost((prev) => (prev ? { ...prev, reply_count: (prev.reply_count || 0) + 1 } : prev));
         setTimeout(() => bottomRef.current?.scrollIntoView({ behavior: 'smooth' }), 50);
       })
