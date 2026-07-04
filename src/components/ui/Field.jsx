@@ -47,7 +47,12 @@ export function TextArea({ style, ...props }) {
 }
 
 export function Label({ children }) {
-  return <label style={{ display: 'block', fontFamily: T.sans, fontSize: 13, color: T.inkSoft, marginBottom: 6, fontWeight: 600 }}>{children}</label>;
+  return (
+    <label style={{
+      display: 'block', fontFamily: T.sans, fontSize: 11, color: T.muted,
+      marginBottom: 8, fontWeight: 700, letterSpacing: 1.5, textTransform: 'uppercase',
+    }}>{children}</label>
+  );
 }
 
 export function ErrorText({ children }) {
